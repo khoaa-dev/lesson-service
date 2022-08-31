@@ -22,7 +22,9 @@ class LessonCommandController (val lessonCmdRepository: LessonCmdRepository){
 
         return lessonCmdRepository.findById(lessonId).map { existingLesson ->
             val updatedLesson: LessonCmd = existingLesson
-                    .copy(status = newStatus.status)
+                    .copy(status = newStatus.status,
+                            realTimeStart = newStatus.realTimeStart,
+                            realTimeEnd = newStatus.realTimeEnd)
             ResponseEntity.ok().body(lessonCmdRepository.save(updatedLesson))
         }.orElse(ResponseEntity.notFound().build())
     }
