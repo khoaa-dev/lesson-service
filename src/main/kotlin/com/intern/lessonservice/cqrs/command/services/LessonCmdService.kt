@@ -16,7 +16,9 @@ class LessonCmdService (val lessonCmdRepository: LessonCmdRepository){
             val updatedStatus: LessonCmd =
                     currentStatus
                             .copy(
-                                    status = newStatus.status
+                                    status = newStatus.status,
+                                    realTimeStart = newStatus.realTimeStart,
+                                    realTimeEnd = newStatus.realTimeEnd
                             )
             ResponseEntity.ok().body(lessonCmdRepository.save(updatedStatus))
         }.orElse(ResponseEntity.notFound().build())
