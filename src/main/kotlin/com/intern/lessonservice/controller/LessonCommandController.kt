@@ -9,24 +9,20 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class LessonCommandController (val lessonCmdRepository: LessonCmdRepository){
+class LessonCommandController (val lessonCmdService: LessonCmdService){
     @PostMapping("/lessons")
-    fun createNewLesson(@Valid @RequestBody lessonCmd: LessonCmd): LessonCmd =
-            lessonCmdRepository.save(lessonCmd)
+    fun createNewLesson(@Valid @RequestBody lessonCmd: LessonCmd): LessonCmd {
+        return lessonCmdService.addLesson(lessonCmd)
+    }
+
 
     //update
-    @PutMapping("/lessons/status/{id}")
+    @PutMapping("/lessons/id_lesson={id}")
     fun updateStatusById(
             @PathVariable(value = "id") lessonId: Long,
-            @Valid @RequestBody newStatus: LessonCmd): ResponseEntity<LessonCmd> {
+            @Valid @RequestBody updateLesson: LessonCmd): ResponseEntity<LessonCmd> {
 
-        return lessonCmdRepository.findById(lessonId).map { existingLesson ->
-            val updatedLesson: LessonCmd = existingLesson
-                    .copy(status = newStatus.status,
-                            realTimeStart = newStatus.realTimeStart,
-                            realTimeEnd = newStatus.realTimeEnd)
-            ResponseEntity.ok().body(lessonCmdRepository.save(updatedLesson))
-        }.orElse(ResponseEntity.notFound().build())
+        return lessonCmdService.updateLessonInfo(lessonId, updateLesson)
     }
 }
 

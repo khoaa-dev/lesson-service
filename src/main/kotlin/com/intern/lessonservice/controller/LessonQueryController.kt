@@ -1,9 +1,7 @@
 package com.intern.lessonservice.controller
 
-import com.intern.lessonservice.cqrs.query.domain.Lesson
-import com.intern.lessonservice.cqrs.query.services.LessonService
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
+import com.intern.lessonservice.cqrs.query.domain.LessonInfo
+import com.intern.lessonservice.cqrs.query.services.LessonQueryService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -11,15 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
-class LessonQueryController (val lessonService: LessonService){
-    @GetMapping("/lessons")
-    //fun getAllLessons(): List<Lesson> = lessonService.findAll()
-    fun getAllLessons() = ResponseEntity(lessonService.findAll(), HttpStatus.OK)
+class LessonQueryController (val lessonQueryService: LessonQueryService){
 
-    @GetMapping("lessons/{id}")
+    @GetMapping("/lessons/id_course={id}")
     fun getLessonById(
-        @PathVariable(value = "id") lessonId: Long
-    ): ResponseEntity<Lesson> {
-        return lessonService.findById(lessonId)
+        @PathVariable(value = "id") id_course: Long
+    ): MutableList<LessonInfo> {
+        return lessonQueryService.findLessonByIdCourse(id_course)
     }
 }
