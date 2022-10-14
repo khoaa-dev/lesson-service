@@ -1,15 +1,16 @@
-package com.intern.lessonservice.cqrs.command.domain
+package com.intern.lessonservice.cqrs.query.domain
 
 import javax.persistence.*
 
+
 @Entity
 @Table(name = "lesson")
-data class LessonCmd(
+data class LessonInfo(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = 1,
 
         @Column(name = "id_course")
-        var courseId: Long?,
+        var courseId: Long? = 1,
 
         @Column(name = "statuss")
         var status: String? = "",
