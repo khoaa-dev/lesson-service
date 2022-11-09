@@ -27,11 +27,11 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("mysql:mysql-connector-java")
 	runtimeOnly("org.postgresql:postgresql")
+	implementation("com.google.firebase:firebase-admin:9.1.0")
 	implementation("commons-codec:commons-codec:1.15")
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
 	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation("org.postgresql:postgresql:42.5.0")
 
 
