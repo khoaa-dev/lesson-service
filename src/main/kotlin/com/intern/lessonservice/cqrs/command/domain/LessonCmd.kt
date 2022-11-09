@@ -9,7 +9,7 @@ data class LessonCmd(
         var id: Long? = 1,
 
         @Column(name = "id_course")
-        var courseId: Long?,
+        var courseId: Int?,
 
         @Column(name = "statuss")
         var status: String? = "",

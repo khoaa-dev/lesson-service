@@ -17,4 +17,9 @@ class LessonQueryController (val lessonQueryService: LessonQueryService){
     ): MutableList<LessonInfo> {
         return lessonQueryService.findLessonByIdCourse(id_course)
     }
+
+    @GetMapping("/lessons")
+    fun getLessonById(): MutableList<LessonInfo> {
+        return lessonQueryService.findAll()
+    }
 }
