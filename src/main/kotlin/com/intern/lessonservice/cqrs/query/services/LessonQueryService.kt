@@ -10,4 +10,8 @@ class LessonQueryService (val lessonInfoRepository: LessonInfoRepository) {
     fun findLessonByIdCourse(id_course: Long): MutableList<LessonInfo> {
         return lessonInfoRepository.findLessonByCourseId(id_course)
     }
+
+    fun findAll(): MutableList<LessonInfo> {
+        return lessonInfoRepository.findAll()
+    }
 }
