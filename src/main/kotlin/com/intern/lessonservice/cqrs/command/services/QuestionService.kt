@@ -3,49 +3,49 @@ package com.intern.lessonservice.cqrs.command.services
 import com.google.api.core.ApiFuture
 import com.google.cloud.firestore.*
 import com.google.firebase.cloud.FirestoreClient
-import com.intern.lessonservice.cqrs.command.domain.Quiz
+import com.intern.lessonservice.cqrs.command.domain.Question
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.concurrent.ExecutionException
 
 
 @Service
-class QuizService {
+class QuestionService {
     val COLLECTION_NAME="evtutor_quiz"
 
     @Throws(InterruptedException::class, ExecutionException::class)
-    fun saveQuizDetails(quiz: Quiz): Quiz {
+    fun saveQuestionDetails(question: Question): Question {
         var id = UUID.randomUUID()
-        quiz.id = id.toString()
+        question.id = id.toString()
         val dbFirestore: Firestore = FirestoreClient.getFirestore()
-        dbFirestore.collection(COLLECTION_NAME).document(quiz.id.toString()).set(quiz)
-        return quiz
+        dbFirestore.collection(COLLECTION_NAME).document(question.id.toString()).set(question)
+        return question
     }
 
     @Throws(InterruptedException::class, ExecutionException::class)
-    fun updateQuizDetails(quiz: Quiz): Quiz {
+    fun updateQuestionDetails(question: Question): Question {
         val dbFirestore: Firestore = FirestoreClient.getFirestore()
-        dbFirestore.collection(COLLECTION_NAME).document(quiz.id.toString()).set(quiz)
-        return quiz
+        dbFirestore.collection(COLLECTION_NAME).document(question.id.toString()).set(question)
+        return question
     }
 
     @Throws(InterruptedException::class, ExecutionException::class)
-    fun getQuizByLessonId(lessonId: Long): MutableList<Quiz> {
+    fun getQuestionByQuizId(quizId: Long): MutableList<Question> {
         val dbFirestore: Firestore = FirestoreClient.getFirestore()
         val documentReference = dbFirestore.collection(COLLECTION_NAME)
-        val query: Query = documentReference.whereEqualTo("idLesson", lessonId)
+        val query: Query = documentReference.whereEqualTo("idQuiz", quizId)
         val querySnapshot = query.get()
         val documents: List<QueryDocumentSnapshot> = querySnapshot.get().documents
-        var listQuiz: MutableList<Quiz> = mutableListOf()
+        var listQuestion: MutableList<Question> = mutableListOf()
         for (document in documents) {
-            listQuiz.add(document.toObject(Quiz::class.java))
+            listQuestion.add(document.toObject(Question::class.java))
         }
-        return listQuiz
+        return listQuestion
     }
 
-    fun deleteQuiz(quizId: String): List<String> {
+    fun deleteQuestion(questionId: String): List<String> {
         val dbFirestore: Firestore = FirestoreClient.getFirestore()
-        val writeResult: ApiFuture<WriteResult> = dbFirestore.collection(COLLECTION_NAME).document(quizId).delete()
-        return listOf<String>("Quiz with ID $quizId has been deleted")
+        val writeResult: ApiFuture<WriteResult> = dbFirestore.collection(COLLECTION_NAME).document(questionId).delete()
+        return listOf<String>("Quiz with ID $questionId has been deleted")
     }
 }

@@ -1,13 +1,11 @@
 package com.intern.lessonservice.cqrs.command.domain
 
 import com.google.auto.value.AutoValue.Builder
-import java.util.UUID
 
 @Builder
-class Quiz(
+class Question(
     var id: String? = "",
-    var idLesson: Long? = 1,
-    var title: String? = "",
+    var idQuiz: Long? = 1,
     var question: String? = "",
     var answerA: Answer? = null,
     var answerB: Answer? = null,
