@@ -16,7 +16,6 @@ import javax.annotation.PostConstruct
 
 
 @Service
-@PropertySource("classpath:FirebaseEnvironmentVariables.properties")
 class FirebaseInitialize {
     @Autowired
     lateinit var env: Environment
