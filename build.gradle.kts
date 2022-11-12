@@ -29,6 +29,7 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	implementation("com.google.firebase:firebase-admin:9.1.0")
 	implementation("commons-codec:commons-codec:1.15")
+	implementation("commons-io:commons-io:2.11.0")
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
 	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
