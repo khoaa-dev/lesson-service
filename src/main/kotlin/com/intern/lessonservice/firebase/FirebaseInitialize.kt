@@ -17,9 +17,6 @@ import javax.annotation.PostConstruct
 
 @Service
 class FirebaseInitialize {
-    @Autowired
-    lateinit var env: Environment
-
     var projectId: String = ""
 
     @PostConstruct
