@@ -11,7 +11,7 @@ import javax.sql.DataSource
 class DataSourceConfiguration {
     val hostName = System.getenv("HOST_NAME")!!
     val port = System.getenv("DB_PORT")!!
-    val userName = System.getenv("USERNAME")!!
+    val userName = System.getenv("USER")!!
     val password = System.getenv("PASSWORD")!!
     val databaseName = System.getenv("DATABASE_NAME")!!
 
