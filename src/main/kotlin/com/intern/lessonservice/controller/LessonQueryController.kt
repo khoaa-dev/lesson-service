@@ -22,4 +22,9 @@ class LessonQueryController (val lessonQueryService: LessonQueryService){
     fun getLessonById(): MutableList<LessonInfo> {
         return lessonQueryService.findAll()
     }
+
+    @GetMapping("/lessonOnToday/id_student={id_student}")
+    fun getLessonOnCurrentDate(@PathVariable(value = "id_student") id_student: Long): MutableList<LessonInfo> {
+        return lessonQueryService.findAllLessonInCurrentDate(id_student)
+    }
 }
