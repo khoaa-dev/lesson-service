@@ -1,5 +1,6 @@
 package com.intern.lessonservice.cqrs.command.domain
 
+import java.sql.Date
 import javax.persistence.*
 
 
@@ -22,6 +23,6 @@ data class Course(
     var tutorFee: Double?,
 
     @Column(name = "date_created")
-    var dateCreated: String? = "",
+    var dateCreated: Date?,
 
 )

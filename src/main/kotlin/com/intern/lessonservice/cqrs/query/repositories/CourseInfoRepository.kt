@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository
 interface CourseInfoRepository : JpaRepository<CourseInfo, Long> {
     @Query("SELECT * FROM course WHERE id_teacher = '%:id_teacher%'")
     fun findCourseByIdTeacher(id_teacher: Long): MutableList<CourseInfo>
+
+    @Query("SELECT * FROM course WHERE id_student = '%:id_student%'")
+    fun findCourseByIdStudent(id_student: Long): MutableList<CourseInfo>
 }
