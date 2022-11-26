@@ -22,15 +22,12 @@ class LessonQueryService (
         return lessonInfoRepository.findAll()
     }
 
-    fun findAllLessonInCurrentDate(id_student: Long): MutableList<LessonInfo> {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val time_start = LocalDate.now().format(formatter).toString()
-
+    fun findAllLessonByDate(id_student: Long, date: String): MutableList<LessonInfo> {
         var lessonListToday: MutableList<LessonInfo> = mutableListOf()
         var courseList = courseInfoRepository.findCourseByIdStudent(id_student)
 
         for (course: CourseInfo in courseList) {
-            var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, time_start)
+            var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
             for (lesson: LessonInfo in lessonList) {
                 lessonListToday.add(lesson)
             }
