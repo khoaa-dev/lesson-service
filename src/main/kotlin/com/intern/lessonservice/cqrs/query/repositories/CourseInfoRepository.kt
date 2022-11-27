@@ -1,6 +1,7 @@
 package com.intern.lessonservice.cqrs.query.repositories
 
 import com.intern.lessonservice.cqrs.query.domain.CourseInfo
+import com.intern.lessonservice.cqrs.query.domain.LessonInfo
 import org.springframework.data.jdbc.repository.query.Query
 import org.springframework.data.jpa.repository.JpaRepository
 

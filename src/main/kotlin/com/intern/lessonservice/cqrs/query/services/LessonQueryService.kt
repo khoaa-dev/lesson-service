@@ -7,6 +7,7 @@ import com.intern.lessonservice.cqrs.query.repositories.LessonInfoRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Service
 class LessonQueryService (
@@ -46,5 +47,11 @@ class LessonQueryService (
             }
         }
         return listLesson
+    }
+
+    fun findCourseByIdLesson(id_lesson: Long): Optional<CourseInfo>? {
+        val lesson = lessonInfoRepository.findById(id_lesson)
+        var course = lesson?.get()?.courseId?.let { courseInfoRepository.findById(it) }
+        return course
     }
 }
