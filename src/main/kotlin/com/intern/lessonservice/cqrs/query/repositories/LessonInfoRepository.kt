@@ -11,4 +11,6 @@ interface LessonInfoRepository : JpaRepository<LessonInfo, Long> {
     fun findLessonByCourseId(id_course: Long?): MutableList<LessonInfo>
 
     fun findByCourseIdAndTimeStartIgnoreCaseContaining(id_course: Long?, time_start: String): MutableList<LessonInfo>
+
+
 }

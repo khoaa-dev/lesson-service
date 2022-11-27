@@ -34,4 +34,17 @@ class LessonQueryService (
         }
         return lessonListToday
     }
+
+    fun findLessonByTeacherIdAndDate(id_teacher: Long, date: String): MutableList<LessonInfo> {
+        var listLesson: MutableList<LessonInfo> = mutableListOf()
+        var courseList = courseInfoRepository.findCourseByIdTeacher(id_teacher)
+
+        for (course: CourseInfo in courseList) {
+            var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
+            for (lesson: LessonInfo in lessonList) {
+                listLesson.add(lesson)
+            }
+        }
+        return listLesson
+    }
 }
