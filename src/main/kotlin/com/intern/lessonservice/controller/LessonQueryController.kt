@@ -2,6 +2,7 @@ package com.intern.lessonservice.controller
 
 import com.intern.lessonservice.cqrs.query.domain.CourseInfo
 import com.intern.lessonservice.cqrs.query.domain.LessonInfo
+import com.intern.lessonservice.cqrs.query.domain.LessonInfoByIdStudentAndDate
 import com.intern.lessonservice.cqrs.query.services.LessonQueryService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -28,8 +29,8 @@ class LessonQueryController (val lessonQueryService: LessonQueryService){
     @GetMapping("/lessonByDate/id_student={id_student}&date={date}")
     fun getLessonByStudentIdAndDate(@PathVariable(value = "id_student") id_student: Long,
         @PathVariable(value = "date") date: String
-    ): MutableList<LessonInfo> {
-        return lessonQueryService.findAllLessonByDate(id_student, date)
+    ): MutableList<LessonInfoByIdStudentAndDate> {
+        return lessonQueryService.findLessonByStudentIdAndDate(id_student, date)
     }
 
     @GetMapping("/lessonByDate/id_teacher={id_teacher}&date={date}")

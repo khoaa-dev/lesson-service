@@ -2,6 +2,7 @@ package com.intern.lessonservice.cqrs.query.services
 
 import com.intern.lessonservice.cqrs.query.domain.CourseInfo
 import com.intern.lessonservice.cqrs.query.domain.LessonInfo
+import com.intern.lessonservice.cqrs.query.domain.LessonInfoByIdStudentAndDate
 import com.intern.lessonservice.cqrs.query.repositories.CourseInfoRepository
 import com.intern.lessonservice.cqrs.query.repositories.LessonInfoRepository
 import org.springframework.stereotype.Service
@@ -23,14 +24,22 @@ class LessonQueryService (
         return lessonInfoRepository.findAll()
     }
 
-    fun findAllLessonByDate(id_student: Long, date: String): MutableList<LessonInfo> {
-        var lessonListToday: MutableList<LessonInfo> = mutableListOf()
+    fun findLessonByStudentIdAndDate(id_student: Long, date: String): MutableList<LessonInfoByIdStudentAndDate> {
+        var lessonListToday: MutableList<LessonInfoByIdStudentAndDate> = mutableListOf()
         var courseList = courseInfoRepository.findCourseByIdStudent(id_student)
 
         for (course: CourseInfo in courseList) {
+            var lessonInfoByIdStudentAndDate = LessonInfoByIdStudentAndDate()
+            var nameCourse = course.nameCourse
+            lessonInfoByIdStudentAndDate.nameCourse = nameCourse
             var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
             for (lesson: LessonInfo in lessonList) {
-                lessonListToday.add(lesson)
+                lessonInfoByIdStudentAndDate.id = lesson.id
+                lessonInfoByIdStudentAndDate.courseId = lesson.courseId
+                lessonInfoByIdStudentAndDate.status = lesson.status
+                lessonInfoByIdStudentAndDate.timeStart = lesson.timeStart
+                lessonInfoByIdStudentAndDate.timeEnd = lesson.timeEnd
+                lessonListToday.add(lessonInfoByIdStudentAndDate)
             }
         }
         return lessonListToday
