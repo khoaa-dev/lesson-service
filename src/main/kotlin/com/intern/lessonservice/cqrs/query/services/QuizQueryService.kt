@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service
 @Service
 class QuizQueryService(private val quizInfoRepository: QuizInfoRepository) {
     fun getQuizByIdLesson(id_lesson: Long): MutableList<QuizInfo> {
-        return quizInfoRepository.getQuizByIdLesson(id_lesson)
+        return quizInfoRepository.findByIdLesson(id_lesson)
     }
 }
