@@ -16,6 +16,6 @@ class CourseQueryService(val courseInfoRepository: CourseInfoRepository) {
     }
 
     fun findByTeacherId(id_teacher: Long): MutableList<CourseInfo> {
-        return courseInfoRepository.findCourseByIdTeacher(id_teacher)
+        return courseInfoRepository.findByIdTeacher(id_teacher)
     }
 }

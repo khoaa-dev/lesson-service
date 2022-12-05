@@ -17,7 +17,7 @@ class LessonQueryService (
 ) {
 
     fun findLessonByIdCourse(id_course: Long): MutableList<LessonInfo> {
-        return lessonInfoRepository.findLessonByCourseId(id_course)
+        return lessonInfoRepository.findByCourseId(id_course)
     }
 
     fun findAll(): MutableList<LessonInfo> {
@@ -26,7 +26,7 @@ class LessonQueryService (
 
     fun findLessonByStudentIdAndDate(id_student: Long, date: String): MutableList<LessonInfoByIdStudentAndDate> {
         var lessonListToday: MutableList<LessonInfoByIdStudentAndDate> = mutableListOf()
-        var courseList = courseInfoRepository.findCourseByIdStudent(id_student)
+        var courseList = courseInfoRepository.findByIdStudent(id_student)
 
         for (course: CourseInfo in courseList) {
             var lessonInfoByIdStudentAndDate = LessonInfoByIdStudentAndDate()
@@ -47,7 +47,7 @@ class LessonQueryService (
 
     fun findLessonByTeacherIdAndDate(id_teacher: Long, date: String): MutableList<LessonInfo> {
         var listLesson: MutableList<LessonInfo> = mutableListOf()
-        var courseList = courseInfoRepository.findCourseByIdTeacher(id_teacher)
+        var courseList = courseInfoRepository.findByIdTeacher(id_teacher)
 
         for (course: CourseInfo in courseList) {
             var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
