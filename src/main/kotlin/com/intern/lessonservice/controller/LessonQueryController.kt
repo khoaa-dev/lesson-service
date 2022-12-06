@@ -1,7 +1,7 @@
 package com.intern.lessonservice.controller
 
-import com.intern.lessonservice.cqrs.query.domain.CourseInfo
-import com.intern.lessonservice.cqrs.query.domain.LessonInfo
+import com.intern.lessonservice.cqrs.domain.Course
+import com.intern.lessonservice.cqrs.domain.Lesson
 import com.intern.lessonservice.cqrs.query.domain.LessonInfoByIdStudentAndDate
 import com.intern.lessonservice.cqrs.query.services.LessonQueryService
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,12 +17,12 @@ class LessonQueryController (val lessonQueryService: LessonQueryService){
     @GetMapping("/lessons/id_course={id}")
     fun getLessonById(
         @PathVariable(value = "id") id_course: Long
-    ): MutableList<LessonInfo> {
+    ): MutableList<Lesson> {
         return lessonQueryService.findLessonByIdCourse(id_course)
     }
 
     @GetMapping("/lessons")
-    fun getLessonById(): MutableList<LessonInfo> {
+    fun getLessonById(): MutableList<Lesson> {
         return lessonQueryService.findAll()
     }
 
@@ -36,13 +36,13 @@ class LessonQueryController (val lessonQueryService: LessonQueryService){
     @GetMapping("/lessonByDate/id_teacher={id_teacher}&date={date}")
     fun getLessonByTeachertIdAndDate(@PathVariable(value = "id_teacher") id_teacher: Long,
                                @PathVariable(value = "date") date: String
-    ): MutableList<LessonInfo> {
+    ): MutableList<Lesson> {
         return lessonQueryService.findLessonByTeacherIdAndDate(id_teacher, date)
     }
 
     @GetMapping("/courseInfo/id_lesson={id_lesson}")
     fun getCourseInfoByIdLesson(@PathVariable(value = "id_lesson") id_lesson: Long
-    ): Optional<CourseInfo>? {
+    ): Optional<Course>? {
         return lessonQueryService.findCourseByIdLesson(id_lesson)
     }
 }

@@ -1,6 +1,6 @@
 package com.intern.lessonservice.controller
 
-import com.intern.lessonservice.cqrs.command.domain.Course
+import com.intern.lessonservice.cqrs.domain.Course
 import com.intern.lessonservice.cqrs.command.services.CourseService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable

@@ -1,7 +1,7 @@
 package com.intern.lessonservice.controller
 
-import com.intern.lessonservice.cqrs.command.domain.Course
-import com.intern.lessonservice.cqrs.command.domain.Quiz
+import com.intern.lessonservice.cqrs.domain.Course
+import com.intern.lessonservice.cqrs.domain.Quiz
 import com.intern.lessonservice.cqrs.command.services.QuizService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

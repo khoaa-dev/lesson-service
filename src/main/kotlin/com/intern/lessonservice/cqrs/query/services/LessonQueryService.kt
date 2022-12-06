@@ -1,42 +1,40 @@
 package com.intern.lessonservice.cqrs.query.services
 
-import com.intern.lessonservice.cqrs.query.domain.CourseInfo
-import com.intern.lessonservice.cqrs.query.domain.LessonInfo
+import com.intern.lessonservice.cqrs.domain.Course
+import com.intern.lessonservice.cqrs.domain.Lesson
 import com.intern.lessonservice.cqrs.query.domain.LessonInfoByIdStudentAndDate
-import com.intern.lessonservice.cqrs.query.repositories.CourseInfoRepository
-import com.intern.lessonservice.cqrs.query.repositories.LessonInfoRepository
+import com.intern.lessonservice.cqrs.repositories.CourseRepository
+import com.intern.lessonservice.cqrs.repositories.LessonRepository
 import org.springframework.stereotype.Service
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Service
 class LessonQueryService (
-    val lessonInfoRepository: LessonInfoRepository,
-    val courseInfoRepository: CourseInfoRepository
+    val lessonRepository: LessonRepository,
+    val courseRepository: CourseRepository
 ) {
 
-    fun findLessonByIdCourse(id_course: Long): MutableList<LessonInfo> {
-        return lessonInfoRepository.findByCourseId(id_course)
+    fun findLessonByIdCourse(id_course: Long): MutableList<Lesson> {
+        return lessonRepository.findByCourseId(id_course)
     }
 
-    fun findAll(): MutableList<LessonInfo> {
-        return lessonInfoRepository.findAll()
+    fun findAll(): MutableList<Lesson> {
+        return lessonRepository.findAll()
     }
 
     fun findLessonByStudentIdAndDate(id_student: Long, date: String): MutableList<LessonInfoByIdStudentAndDate> {
         var lessonListToday: MutableList<LessonInfoByIdStudentAndDate> = mutableListOf()
-        var courseList = courseInfoRepository.findByIdStudent(id_student)
+        var courseList = courseRepository.findByIdStudent(id_student)
 
-        for (course: CourseInfo in courseList) {
+        for (course: Course in courseList) {
             var lessonInfoByIdStudentAndDate = LessonInfoByIdStudentAndDate()
             var nameCourse = course.nameCourse
             lessonInfoByIdStudentAndDate.nameCourse = nameCourse
-            var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
-            for (lesson: LessonInfo in lessonList) {
+            var lessonList = lessonRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
+            for (lesson: Lesson in lessonList) {
                 lessonInfoByIdStudentAndDate.id = lesson.id
                 lessonInfoByIdStudentAndDate.courseId = lesson.courseId
-                lessonInfoByIdStudentAndDate.status = lesson.status
+                lessonInfoByIdStudentAndDate.status = lesson.status.toString()
                 lessonInfoByIdStudentAndDate.timeStart = lesson.timeStart
                 lessonInfoByIdStudentAndDate.timeEnd = lesson.timeEnd
                 lessonListToday.add(lessonInfoByIdStudentAndDate)
@@ -45,22 +43,22 @@ class LessonQueryService (
         return lessonListToday
     }
 
-    fun findLessonByTeacherIdAndDate(id_teacher: Long, date: String): MutableList<LessonInfo> {
-        var listLesson: MutableList<LessonInfo> = mutableListOf()
-        var courseList = courseInfoRepository.findByIdTeacher(id_teacher)
+    fun findLessonByTeacherIdAndDate(id_teacher: Long, date: String): MutableList<Lesson> {
+        var listLesson: MutableList<Lesson> = mutableListOf()
+        var courseList = courseRepository.findByIdTeacher(id_teacher)
 
-        for (course: CourseInfo in courseList) {
-            var lessonList = lessonInfoRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
-            for (lesson: LessonInfo in lessonList) {
+        for (course: Course in courseList) {
+            var lessonList = lessonRepository.findByCourseIdAndTimeStartIgnoreCaseContaining(course.id, date)
+            for (lesson: Lesson in lessonList) {
                 listLesson.add(lesson)
             }
         }
         return listLesson
     }
 
-    fun findCourseByIdLesson(id_lesson: Long): Optional<CourseInfo>? {
-        val lesson = lessonInfoRepository.findById(id_lesson)
-        var course = lesson?.get()?.courseId?.let { courseInfoRepository.findById(it) }
+    fun findCourseByIdLesson(id_lesson: Long): Optional<Course>? {
+        val lesson = lessonRepository.findById(id_lesson)
+        var course = lesson?.get()?.courseId?.let { courseRepository.findById(it) }
         return course
     }
 }

@@ -1,17 +1,15 @@
-package com.intern.lessonservice.cqrs.command.domain
+package com.intern.lessonservice.cqrs.domain
 
-import java.sql.Date
-import java.time.format.DateTimeFormatter
 import javax.persistence.*
 
 @Entity
 @Table(name = "lesson")
-data class LessonCmd(
+data class Lesson(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = 1,
 
         @Column(name = "id_course")
-        var courseId: Int?,
+        var courseId: Long?,
 
         @Column(name = "statuss")
         var status: Int? = -1,

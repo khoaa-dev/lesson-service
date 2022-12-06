@@ -38,4 +38,3 @@ out/
 
 src/main/resources/FirebaseEnvironmentVariables.properties
 src/main/resources/application-dev.properties
-evtutor-quiz-firebase.json
