@@ -1,10 +1,10 @@
-package com.intern.lessonservice.cqrs.query.domain
+package com.intern.lessonservice.cqrs.domain
 
 import javax.persistence.*
 
 @Entity
 @Table(name = "quiz")
-data class QuizInfo(
+data class Quiz(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = 1,
 
@@ -12,5 +12,6 @@ data class QuizInfo(
     var title: String? = "",
 
     @Column(name = "id_lesson")
-    var idLesson: Long? = 1,
+    var lessonId: Long? = 1,
+
 )

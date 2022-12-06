@@ -1,10 +1,12 @@
-package com.intern.lessonservice.cqrs.query.domain
+package com.intern.lessonservice.cqrs.domain
 
+import java.sql.Date
 import javax.persistence.*
+
 
 @Entity
 @Table(name = "course")
-class CourseInfo (
+data class Course(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = 1,
 
@@ -21,5 +23,6 @@ class CourseInfo (
     var tutorFee: Double?,
 
     @Column(name = "date_created")
-    var dateCreated: String? = "",
+    var dateCreated: Date?,
+
 )

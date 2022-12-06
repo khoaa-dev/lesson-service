@@ -1,7 +1,7 @@
 package com.intern.lessonservice.cqrs.command.services
 
-import com.intern.lessonservice.cqrs.command.domain.Course
-import com.intern.lessonservice.cqrs.command.repositories.CourseRepository
+import com.intern.lessonservice.cqrs.domain.Course
+import com.intern.lessonservice.cqrs.repositories.CourseRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 

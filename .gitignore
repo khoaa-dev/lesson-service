@@ -39,3 +39,7 @@ out/
 src/main/resources/FirebaseEnvironmentVariables.properties
 src/main/resources/application-dev.properties
 evtutor-quiz-firebase.json
+
+### Firebase Configuration ###
+src/main/kotlin/com/intern/lessonservice/firebase/FirebaseCredential.kt
+src/main/kotlin/com/intern/lessonservice/firebase/FirebaseInitialize.kt
