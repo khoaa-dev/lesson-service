@@ -21,7 +21,7 @@ class QuestionCommandController(val questionService: QuestionService) {
         return questionService.addQuestion(question)
     }
 
-    @PutMapping("/updateQuestion")
+    @PutMapping("/updateQuestion/{id_question}")
     fun updateQuestion(
         @PathVariable(value = "id_question") id_question: Long,
         @Valid @RequestBody question: Question
